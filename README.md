@@ -1,1 +1,1 @@
-# 2026_IDW_Proyectio
+# 2026_IDW_Proyecto
