@@ -1,0 +1,32 @@
+:root {
+  --cm-bg: #f5f7fb;
+  --cm-text: #1f2937;
+  --cm-muted: #6b7280;
+  --cm-card: #ffffff;
+  --cm-surface: #ffffff;
+  --cm-border: rgba(15, 23, 42, 0.08);
+}
+
+html[data-bs-theme="dark"] {
+  --cm-bg: #0f172a;
+  --cm-text: #e5e7eb;
+  --cm-muted: #9ca3af;
+  --cm-card: #111827;
+  --cm-surface: #101827;
+  --cm-border: rgba(148, 163, 184, 0.18);
+}
+
+body {
+  background: var(--cm-bg);
+  color: var(--cm-text);
+  transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+.card,
+.table,
+.navbar,
+.alert,
+.form-control,
+.form-select {
+  transition: background-color 0.25s ease, color 0.25s ease, border-color 0.25s ease;
+}
