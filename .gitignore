@@ -11,3 +11,12 @@ npm-debug.log*
 
 # credential files
 control/credencials_rdf.json
+
+
+# files
+*.mp4
+*.avi
+*.mkv
+*.mov
+*.flv
+*.wmv
