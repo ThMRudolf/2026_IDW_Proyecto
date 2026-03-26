@@ -100,6 +100,17 @@
         <button id="refreshBtn" class="btn btn-outline-primary">Actualizar datos</button>
       </div>
       <div class="row g-3" id="artistGrid"></div>
+      <div class="mt-4">
+  <h4>Agregar artista</h4>
+
+  <input id="name" class="form-control mb-2" placeholder="Nombre del artista">
+  <input id="genre" class="form-control mb-2" placeholder="Género">
+  <input id="popularity" type="number" class="form-control mb-2" placeholder="Popularidad">
+
+  <button onclick="addArtist()" class="btn btn-primary">
+    Agregar
+  </button>
+</div>
     </section>
 
     <section id="conciertos" class="mb-5">
