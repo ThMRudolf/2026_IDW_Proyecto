@@ -89,11 +89,34 @@ function renderMetrics() {
   if (metricAttendance) metricAttendance.textContent = totalAttendance.toLocaleString('es-MX');
   if (metricSales) metricSales.textContent = totalSales.toLocaleString('es-MX');
 }
+  async function loadArtists() {
+  try {
+    const res = await fetch("data/artists.json");
+    const data = await res.json();
 
+    // reemplaza los datos existentes
+    artists.length = 0;
+    data.artists.forEach(a => {
+      artists.push({
+        id: Math.random(),
+        name: a.display_name,
+        genre: a.genre,
+        popularity: a.popularity
+      });
+    });
+
+    renderArtists();
+    renderPopularityChart(); // para que también se actualice gráfica
+
+  } catch (error) {
+    console.log("Error cargando artistas:", error);
+  }
+}
 // Tarjetas de artistas
 function renderArtists() {
   const artistGrid = document.getElementById('artistGrid');
   if (!artistGrid) return;
+
 
   artistGrid.innerHTML = artists.map(artist => `
     <div class="col-md-6 col-xl-3">
@@ -292,6 +315,7 @@ function setupRefreshButton() {
 // Inicio
 
 document.addEventListener('DOMContentLoaded', () => {
+ loadArtists();
   renderMetrics();
   renderArtists();
   renderConcertTable();
@@ -302,3 +326,4 @@ document.addEventListener('DOMContentLoaded', () => {
   setupPlanningForm();
   setupRefreshButton();
 });
+
