@@ -13,13 +13,8 @@ if (themeToggle) {
     localStorage.setItem('theme', newTheme);
   });
 }
-const artists = [
-  { id: 1, name: 'Sabrina Carpenter', genre: 'Pop', popularity: 95 },
-  { id: 2, name: 'Taylor Swift', genre: 'Pop', popularity: 99 },
-  { id: 3, name: 'The Weeknd', genre: 'R&B', popularity: 92 },
-  { id: 4, name: 'Bad Bunny', genre: 'Urbano', popularity: 97 }
-];
 
+let artists = [];
 const concerts = [
   {
     id: 1,
@@ -75,6 +70,47 @@ const concerts = [
   }
 ];
 
+function saveArtists() {
+  localStorage.setItem('artists', JSON.stringify(artists));
+}
+
+async function loadArtists() {
+  try {
+    const savedArtists = JSON.parse(localStorage.getItem('artists'));
+
+    if (savedArtists && Array.isArray(savedArtists) && savedArtists.length > 0) {
+      artists = savedArtists;
+    } else {
+      const res = await fetch('data/artists.json');
+
+      if (!res.ok) {
+        throw new Error(`Error al cargar artistas: ${res.status}`);
+      }
+
+      const data = await res.json();
+
+      // Soporta dos formatos:
+      // 1) [{...}, {...}]
+      // 2) { artists: [{...}, {...}] }
+      const source = Array.isArray(data) ? data : (data.artists || []);
+
+      artists = source.map((a, index) => ({
+        id: a.id ?? index + 1,
+        name: a.name || a.display_name || 'Artista sin nombre',
+        genre: a.genre || 'N/A',
+        popularity: Number(a.popularity) || 0
+      }));
+
+      saveArtists();
+    }
+
+    renderArtists();
+    renderArtistSelect();
+    renderPopularityChart();
+  } catch (error) {
+    console.error('Error cargando artistas:', error);
+  }
+}
 
 // Métricas
 function renderMetrics() {
@@ -89,48 +125,24 @@ function renderMetrics() {
   if (metricAttendance) metricAttendance.textContent = totalAttendance.toLocaleString('es-MX');
   if (metricSales) metricSales.textContent = totalSales.toLocaleString('es-MX');
 }
-  async function loadArtists() {
-  try {
-    const res = await fetch("data/artists.json");
-    const data = await res.json();
 
-    // reemplaza los datos existentes
-    artists.length = 0;
-    data.artists.forEach(a => {
-      artists.push({
-        id: Math.random(),
-        name: a.display_name,
-        genre: a.genre,
-        popularity: a.popularity
-      });
-    });
-
-    renderArtists();
-    renderPopularityChart(); // para que también se actualice gráfica
-
-  } catch (error) {
-    console.log("Error cargando artistas:", error);
-  }
-}
 // Tarjetas de artistas
 function renderArtists() {
   const artistGrid = document.getElementById('artistGrid');
   if (!artistGrid) return;
-
 
   artistGrid.innerHTML = artists.map(artist => `
     <div class="col-md-6 col-xl-3">
       <div class="card shadow-sm h-100">
         <div class="card-body">
           <h3 class="h5">${artist.name}</h3>
-          <p class="mb-2 text-body-secondary">Género: ${artist.genre}</p>
+          <p class="mb-2 text-body-secondary">Género: ${artist.genre || 'N/A'}</p>
           <p class="mb-0"><strong>Popularidad:</strong> ${artist.popularity}</p>
         </div>
       </div>
     </div>
   `).join('');
 }
-
 
 // Tabla de conciertos
 function renderConcertTable() {
@@ -150,7 +162,7 @@ function renderConcertTable() {
   `).join('');
 }
 
-// Select del formulario
+// Select del formulario de conciertos
 function renderArtistSelect() {
   const select = document.getElementById('artistId');
   if (!select) return;
@@ -159,7 +171,6 @@ function renderArtistSelect() {
     <option value="${artist.id}">${artist.name}</option>
   `).join('');
 }
-
 
 // Gráfica Chart.js
 let popularityChartInstance = null;
@@ -194,7 +205,6 @@ function renderPopularityChart() {
     }
   });
 }
-
 
 // Mapa Leaflet
 let mapInstance = null;
@@ -267,9 +277,8 @@ function setupPlanningForm() {
     event.preventDefault();
 
     const formData = new FormData(form);
-
     const artistId = Number(formData.get('artistId'));
-    const artist = artists.find(a => a.id === artistId);
+    const artist = artists.find(a => Number(a.id) === artistId);
 
     const newConcert = {
       id: concerts.length + 1,
@@ -294,9 +303,46 @@ function setupPlanningForm() {
   });
 }
 
+// Formulario para agregar artista
+function setupArtistForm() {
+  const form = document.getElementById('artistForm');
+  if (!form) return;
+
+  form.addEventListener('submit', (event) => {
+    event.preventDefault();
+
+    const nameInput = document.getElementById('name');
+    const genreInput = document.getElementById('genre');
+    const popularityInput = document.getElementById('popularity');
+
+    const name = nameInput.value.trim();
+    const genre = genreInput.value.trim();
+    const popularity = Number(popularityInput.value);
+
+    if (!name || !genre || Number.isNaN(popularity)) {
+      alert('Completa todos los campos del artista');
+      return;
+    }
+
+    const newArtist = {
+      id: Date.now(),
+      name,
+      genre,
+      popularity
+    };
+
+    artists.push(newArtist);
+    saveArtists();
+
+    renderArtists();
+    renderArtistSelect();
+    renderPopularityChart();
+
+    form.reset();
+  });
+}
 
 // Botón actualizar
-
 function setupRefreshButton() {
   const refreshBtn = document.getElementById('refreshBtn');
   if (!refreshBtn) return;
@@ -305,25 +351,22 @@ function setupRefreshButton() {
     renderMetrics();
     renderArtists();
     renderConcertTable();
+    renderArtistSelect();
     renderPopularityChart();
     renderMap();
     renderCalendar();
   });
 }
 
-
 // Inicio
-
-document.addEventListener('DOMContentLoaded', () => {
- loadArtists();
+document.addEventListener('DOMContentLoaded', async () => {
+  await loadArtists();
   renderMetrics();
-  renderArtists();
   renderConcertTable();
-  renderArtistSelect();
-  renderPopularityChart();
   renderMap();
   renderCalendar();
   setupPlanningForm();
+  setupArtistForm();
   setupRefreshButton();
 });
 
