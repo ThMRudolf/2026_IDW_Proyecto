@@ -11,6 +11,40 @@
       "display_name": "Rosalía",
       "genre": "",
       "popularity": 60
+    },
+    {
+      "spotify_id": "74KM79TiuVKeVCqs8QtB0B",
+      "display_name": "Sabrina Carpenter",
+      "genre": "",
+      "popularity": 60
+
+    },
+    {
+      "spotify_id": "06HL4z0CvFAxyc27GXpf02",
+      "display_name": "Taylor Swift",
+      "genre": "",
+      "popularity": 60
+
+    },
+    {
+      "spotify_id": "1Xyo4u8uXC1ZmMpatF05PJ",
+      "display_name": "Weeknd",
+      "genre": "",
+      "popularity": 60
+
+    },
+    {
+      "spotify_id": "4pejUc4iciQfgdX6OKulQn",
+      "display_name": "Queens of the Stone Age",
+      "genre": "",
+      "popularity": 60
+
+    },
+    {
+      "spotify_id": "1w5Kfo2jwwIPruYS2UWh56",
+      "display_name": "Pearl Jam",
+      "genre": "",
+      "popularity": 60
     }
   ]
 }
