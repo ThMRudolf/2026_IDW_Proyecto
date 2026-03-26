@@ -104,7 +104,7 @@ Lo pondré una vez que este listo
 
 ## Equipo
 
-- Thomas Martin Rudolph
+- Thomas Martin Rudolf
 - Natalia Fernandez
 - Sofia Imelda Gonzalez
 - Ana Lucía Ladrón de Guevara 
