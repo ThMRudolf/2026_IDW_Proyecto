@@ -1,0 +1,16 @@
+{
+  "artists": [
+    {
+      "spotify_id": "4q3ewBCX7sLwd24euuV69X",
+      "display_name": "Bad Bunny",
+      "genre": "urban",
+      "popularity": 99
+    },
+    {
+      "spotify_id": "1McMsnEElThX1knmq4aNms",
+      "display_name": "Rosalía",
+      "genre": "",
+      "popularity": 60
+    }
+  ]
+}
