@@ -1,6 +1,7 @@
  {
    "credentials": {
      "client_id": "your_client_id",
-     "client_secret": "your_client_secret"
+     "client_secret": "your_client_secret",
+     "ticketmaster_key": "kdbsQxqskGpzucCVDCjKCnKelz62C4JJ"
    }
 }
