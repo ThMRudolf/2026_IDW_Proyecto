@@ -91,7 +91,7 @@ https://github.com/ThMRudolf/2026_IDW_Proyecto.git
 pip install -r requirements.txt
 
 2. Ejecutar servidor:
-python main.py
+uvicorn main:app --reload --port 8000
 
 
 ---
