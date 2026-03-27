@@ -4,47 +4,57 @@
       "spotify_id": "4q3ewBCX7sLwd24euuV69X",
       "display_name": "Bad Bunny",
       "genre": "urban",
-      "popularity": 99
+      "popularity": null,
+      "followers": null,
+      "monthly_listeners": null
     },
     {
       "spotify_id": "1McMsnEElThX1knmq4aNms",
       "display_name": "Rosalía",
-      "genre": "",
-      "popularity": 60
+      "genre": "??",
+      "popularity": null,
+      "followers": null,
+      "monthly_listeners": null
     },
     {
       "spotify_id": "74KM79TiuVKeVCqs8QtB0B",
       "display_name": "Sabrina Carpenter",
-      "genre": "",
-      "popularity": 60
-
+      "genre": "Pop",
+      "popularity": null,
+      "followers": null,
+      "monthly_listeners": null
     },
     {
       "spotify_id": "06HL4z0CvFAxyc27GXpf02",
       "display_name": "Taylor Swift",
-      "genre": "",
-      "popularity": 60
-
+      "genre": "Pop",
+      "popularity": null,
+      "followers": null,
+      "monthly_listeners": null
     },
     {
       "spotify_id": "1Xyo4u8uXC1ZmMpatF05PJ",
       "display_name": "Weeknd",
-      "genre": "",
-      "popularity": 60
-
+      "genre": "Hip-Hop",
+      "popularity": null,
+      "followers": null,
+      "monthly_listeners": null
     },
     {
       "spotify_id": "4pejUc4iciQfgdX6OKulQn",
       "display_name": "Queens of the Stone Age",
-      "genre": "",
-      "popularity": 60
-
+      "genre": "Stoner Rock",
+      "popularity": null,
+      "followers": null,
+      "monthly_listeners": null
     },
     {
       "spotify_id": "1w5Kfo2jwwIPruYS2UWh56",
       "display_name": "Pearl Jam",
-      "genre": "",
-      "popularity": 60
+      "genre": "Grunge",
+      "popularity": null,
+      "followers": null,
+      "monthly_listeners": null
     }
   ]
 }

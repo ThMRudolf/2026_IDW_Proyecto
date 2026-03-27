@@ -70,8 +70,14 @@ const concerts = [
   }
 ];
 
-function saveArtists() {
+async function saveArtists() {
   localStorage.setItem('artists', JSON.stringify(artists));
+  //
+  await fetch('/save-artists', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(artists)
+  });
 }
 
 async function loadArtists() {
@@ -368,5 +374,19 @@ document.addEventListener('DOMContentLoaded', async () => {
   setupPlanningForm();
   setupArtistForm();
   setupRefreshButton();
+  refreshAllArtists() 
 });
+
+// get all artists from backend and actualize local storage and json file
+async function  refreshAllArtists() {
+  const response = await fetch("http://localhost:8000/artists/sync", {
+    method: "POST",
+  });
+
+  const data = await response.json();
+
+  data.artists.forEach((artist) => {
+    console.log(`${artist.name} → Popularity: ${artist.popularity}/100`);
+  });
+}
 
