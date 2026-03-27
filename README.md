@@ -105,6 +105,6 @@ https://www.4sightanalytics.net/
 ## Equipo
 
 - Thomas Martin Rudolf
-- Natalia Fernandez
+- Natalia Fernandez Mendez
 - Sofia Imelda Gonzalez
 - Ana Lucía Ladrón de Guevara 
